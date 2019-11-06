@@ -28,25 +28,28 @@ public class UserController {
      * @return h_baojian
      */
     @RequestMapping("/addUser")
-    public User addUser(@RequestParam String name,@RequestParam  String phone,@RequestParam  String password){
-        User user = new User();
-        user.setId(UUID.randomUUID().toString().replace("-",""));
-        user.setName(name);
-        user.setIsStatus(1);
-        user.setLoginTime(new Date());
-        user.setNewTime(new Date());
-        user.setPassword(password);
-        user.setPhone(phone);
-        int i = userService.addUser(user);
+    public boolean addUser(@RequestParam String name,@RequestParam  String phone,@RequestParam  String password){
+
+        int i = userService.addUser(name,phone,password);
         if(i == 0){
-            return null;
+            return false;
         }
-        return user;
+        return true;
     }
 
+    /**
+     * 登录
+     * @param name
+     * @param password
+     * @param url 进入登录页面前的路径
+     * @return
+     */
     @RequestMapping("/login")
-    public User login(@RequestParam  String name,@RequestParam  String password){
-
-        return null;
+    public boolean login(@RequestParam  String name,@RequestParam  String password,String url){
+        User user = userService.getUser(name,password);
+        if (user == null){
+            return false;
+        }
+        return true;
     }
 }

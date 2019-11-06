@@ -24,4 +24,7 @@
 		update user set `id`=#{id},`name`=#{name},`password`=#{password},`login_time`=#{loginTime},`new_time`=#{newTime},`phone`=#{phone},`is_status`=#{isStatus}
 	</update>
 
+	<select id="getUser" resultMap="userResult">
+		SELECT * FROM `user` where name = #{name} and password = #{password}
+	</select>
 </mapper>
