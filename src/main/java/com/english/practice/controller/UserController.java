@@ -46,7 +46,7 @@ public class UserController {
 
     @RequestMapping("/login")
     public User login(@RequestParam  String name,@RequestParam  String password){
-        
+
         return null;
     }
 }
