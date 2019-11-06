@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.english.practice.dao.UserDao">
+
+	<resultMap id="userResult" type="com.english.practice.entity.User">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="loginTime" column="login_time" />
+		<result property="newTime" column="new_time" />
+		<result property="phone" column="phone" />
+		<result property="isStatus" column="is_status" />
+	</resultMap>
+
+	<select id="get" resultMap="userResult">
+		select `id`,`name`,`password`,`login_time`,`new_time`,`phone`,`is_status` from user
+	</select>
+
+	<insert id="insert" parameterType="com.english.practice.entity.User">
+		insert into user(`id`,`name`,`password`,`login_time`,`new_time`,`phone`,`is_status`)values(#{id},#{name},#{password},#{loginTime},#{newTime},#{phone},#{isStatus})
+	</insert>
+
+	<update id="update" parameterType="com.english.practice.entity.User">
+		update user set `id`=#{id},`name`=#{name},`password`=#{password},`login_time`=#{loginTime},`new_time`=#{newTime},`phone`=#{phone},`is_status`=#{isStatus}
+	</update>
+
+</mapper>

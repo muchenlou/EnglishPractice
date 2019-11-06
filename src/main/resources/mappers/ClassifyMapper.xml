@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.english.practice.dao.ClassifyDao">
+
+	<resultMap id="classifyResult" type="com.english.practice.entity.Classify">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="userId" column="user_id" />
+		<result property="isStatus" column="is_status" />
+	</resultMap>
+
+	<select id="get" resultMap="classifyResult">
+		select `id`,`name`,`user_id`,`is_status` from classify
+	</select>
+
+	<insert id="insert" parameterType="com.english.practice.entity.Classify">
+		insert into classify(`id`,`name`,`user_id`,`is_status`)values(#{id},#{name},#{userId},#{isStatus})
+	</insert>
+
+	<update id="update" parameterType="com.english.practice.entity.Classify">
+		update classify set `id`=#{id},`name`=#{name},`user_id`=#{userId},`is_status`=#{isStatus}
+	</update>
+
+</mapper>
