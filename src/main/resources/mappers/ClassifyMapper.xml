@@ -21,4 +21,19 @@
 		update classify set `id`=#{id},`name`=#{name},`user_id`=#{userId},`is_status`=#{isStatus}
 	</update>
 
+	<update id="updateIsStatus" parameterType="string">
+		update classify set `is_status`= -1 where id = #{id}
+	</update>
+
+	<update id="updateByName" parameterType="string">
+		update classify set `name`=#{name} where `id`=#{id}
+	</update>
+
+	<select id="queryAllClassify" resultMap="classifyResult">
+		select * from classify where user_id = #{userId} and is_status = 1
+	</select>
+
+	<select id="selectByNameAndUserId" resultMap="classifyResult">
+		select * from classify where user_id = #{userId} and `name` = #{name}
+	</select>
 </mapper>

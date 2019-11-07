@@ -45,11 +45,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/login")
-    public boolean login(@RequestParam  String name,@RequestParam  String password,String url){
+    public User login(@RequestParam  String name,@RequestParam  String password,String url){
         User user = userService.getUser(name,password);
-        if (user == null){
-            return false;
-        }
-        return true;
+        return user;
     }
 }
