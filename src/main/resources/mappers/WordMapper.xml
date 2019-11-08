@@ -23,4 +23,8 @@
 		update word set `id`=#{id},`english_word`=#{englishWord},`china_word`=#{chinaWord},`classify_id`=#{classifyId},`is_status`=#{isStatus},`type`=#{type}
 	</update>
 
+	<select id="queryWordsByType" resultMap="wordResult">
+		select * from word where classify_id = #{classifyId} and type = #{type}
+	</select>
+
 </mapper>
