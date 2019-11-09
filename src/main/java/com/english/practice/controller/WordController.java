@@ -48,4 +48,6 @@ public class WordController {
         List<Word> words = wordService.queryWords(classifyId,type);
         return words;
     }
+
+    public
 }
