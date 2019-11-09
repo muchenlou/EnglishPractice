@@ -49,5 +49,4 @@ public class WordController {
         return words;
     }
 
-    public
 }
