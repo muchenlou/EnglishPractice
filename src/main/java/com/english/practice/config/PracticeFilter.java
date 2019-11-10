@@ -58,7 +58,7 @@ public class PracticeFilter implements Filter {
             if(session!=null&&session.getAttribute("loginUser") != null){
                 chain.doFilter(request, response);
             }else{
-                request.getRequestDispatcher("/login").forward(request, response);
+                request.getRequestDispatcher("/index").forward(request, response);
             }
         }
     }

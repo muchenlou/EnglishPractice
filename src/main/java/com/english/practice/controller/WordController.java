@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/practice/word")
+@RequestMapping("/word")
 public class WordController {
 
     private Logger logger = LoggerFactory.getLogger(WordController.class);

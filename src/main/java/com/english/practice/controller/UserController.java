@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/practict/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -49,4 +49,5 @@ public class UserController {
         User user = userService.getUser(name,password);
         return user;
     }
+
 }

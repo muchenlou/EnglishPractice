@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/practice/classify")
+@RequestMapping("/classify")
 public class ClassifyController {
 
     @Autowired
