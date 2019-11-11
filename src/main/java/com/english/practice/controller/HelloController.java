@@ -5,6 +5,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HelloController {
 
@@ -34,4 +37,16 @@ public class HelloController {
         return "sighIn";
     }
 
+    /*
+    添加分类
+     */
+    @RequestMapping("addClassify.html")
+    public ModelAndView addClassify(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        HttpSession session=request.getSession();//获取session并将userName存入session对象
+        String userId = session.getAttribute("userId").toString();
+        modelAndView.addObject("userId",userId);
+        modelAndView.setViewName("addClassify");
+        return modelAndView;
+    }
 }

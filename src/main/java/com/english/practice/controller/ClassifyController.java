@@ -1,17 +1,24 @@
 package com.english.practice.controller;
 
 import com.english.practice.entity.Classify;
+import com.english.practice.entity.User;
 import com.english.practice.service.ClassifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/classify")
 public class ClassifyController {
 
@@ -26,13 +33,14 @@ public class ClassifyController {
      * @param userId
      * @return
      */
+    @ResponseBody
     @RequestMapping("/addClassify")
-    public boolean addClassify(@RequestParam String name,@RequestParam String userId){
+    public int addClassify(@RequestParam String name,@RequestParam String userId){
         int i = classifyService.addClassify(name,userId);
         if (i == 0){
-            return false;
+            return i;
         }
-        return true;
+        return i;
     }
 
     /**
@@ -40,6 +48,7 @@ public class ClassifyController {
      * @param id
      * @return
      */
+    @ResponseBody
     @RequestMapping("/deleteClassify")
     public boolean deleteClassify(@RequestParam String id){
         int i = classifyService.deleteClassify(id);
@@ -55,6 +64,7 @@ public class ClassifyController {
      * @param userId
      * @return
      */
+    @ResponseBody
     @RequestMapping("/updateClassify")
     public boolean updateClassify(@RequestParam String name,@RequestParam String id,@RequestParam String userId){
         int i = classifyService.updateClassify(name,id,userId);
@@ -66,12 +76,17 @@ public class ClassifyController {
 
     /**
      * 查询所有列表
-     * @param userId
      * @return
      */
     @RequestMapping("/queryClassify")
-    public List<Classify> queryClassify(@RequestParam String userId){
+    public ModelAndView queryClassify(HttpServletRequest request){
+        ModelAndView view = new ModelAndView();
+        HttpSession session = request.getSession();
+        String userId = session.getAttribute("userId").toString();
         List<Classify> list = classifyService.queryClassify(userId);
-        return list;
+        view.setViewName("index");
+        view.addObject("list",list);
+        return view;
     }
+
 }

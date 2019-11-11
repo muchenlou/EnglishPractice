@@ -7,10 +7,11 @@
 		<result property="name" column="name" />
 		<result property="userId" column="user_id" />
 		<result property="isStatus" column="is_status" />
+		<result property="newTime" column="new_time" />
 	</resultMap>
 
 	<select id="get" resultMap="classifyResult">
-		select `id`,`name`,`user_id`,`is_status` from classify
+		select `id`,`name`,`user_id`,`is_status`,`new_time` from classify order by new_time
 	</select>
 
 	<insert id="insert" parameterType="com.english.practice.entity.Classify">
@@ -30,10 +31,10 @@
 	</update>
 
 	<select id="queryAllClassify" resultMap="classifyResult">
-		select * from classify where user_id = #{userId} and is_status = 1
+		select * from classify where user_id = #{userId} and is_status = 1 order by new_time
 	</select>
 
 	<select id="selectByNameAndUserId" resultMap="classifyResult">
-		select * from classify where user_id = #{userId} and `name` = #{name}
+		select * from classify where user_id = #{userId} and `name` = #{name} and is_status = 1 order by new_time
 	</select>
 </mapper>

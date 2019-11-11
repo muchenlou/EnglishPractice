@@ -44,10 +44,13 @@ public class PracticeFilter implements Filter {
         HttpSession session = request.getSession(false);
         String uri = request.getRequestURI();
         //是否需要过滤
-        boolean needFilter = false;
+        boolean needFilter = true;
         //不需要登录就可以访问的路径(比如:注册登录等)
-        List<String> list = new ArrayList<String>(Arrays.asList("/login","/submit","/demo"));
+        List<String> list = new ArrayList<String>(Arrays.asList("/","/sigh_in.html","/user/login","/user/addUser"));
         if(list.contains(uri)){
+            needFilter = false;
+        }
+        if (uri.contains("/static/")){
             needFilter = false;
         }
         if (!needFilter) {
@@ -58,7 +61,7 @@ public class PracticeFilter implements Filter {
             if(session!=null&&session.getAttribute("user") != null){
                 chain.doFilter(request, response);
             }else{
-                request.getRequestDispatcher("/index").forward(request, response);
+                request.getRequestDispatcher("/").forward(request, response);
             }
         }
     }

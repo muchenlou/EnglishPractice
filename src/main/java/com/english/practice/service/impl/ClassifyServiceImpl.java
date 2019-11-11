@@ -6,6 +6,7 @@ import com.english.practice.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,14 +19,14 @@ public class ClassifyServiceImpl implements ClassifyService {
         Classify classify = classifyDao.selectByNameAndUserId(name,userId);
         int i = 0;
         if (classify != null){
-            return 0;
+            return 2;
         }
         classify = new Classify();
         classify.setId(UUID.randomUUID().toString().replace("-",""));
         classify.setIsStatus(1);
         classify.setName(name);
         classify.setUserId(userId);
-
+        classify.setNewTime(new Date());
 
         try{
             i = classifyDao.insert(classify);

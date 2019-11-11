@@ -52,6 +52,9 @@ public class UserController {
         User user = userService.getUser(phone,password);
         HttpSession session=request.getSession();//获取session并将userName存入session对象
         session.setAttribute("user", user);
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("name", user.getName());
+        session.setAttribute("phone", user.getPhone());
         return user;
     }
 
