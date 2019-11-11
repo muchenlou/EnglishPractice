@@ -7,5 +7,5 @@ public class Classify {
     private String name;
     private String id;
     private String userId;
-    private Integer isStatus;
+        private Integer isStatus;
 }

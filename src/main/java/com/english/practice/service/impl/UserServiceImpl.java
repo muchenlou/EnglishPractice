@@ -28,6 +28,10 @@ public class UserServiceImpl implements UserService {
         user.setNewTime(new Date());
         user.setPassword(password);
         user.setPhone(phone);
+        User user1 = userDao.selectByNameAndPhone(phone);
+        if (user1 != null){
+            return 2;
+        }
         int insert = 0;
         try {
             user.setPassword(MD5Util.getEncryption(user.getPassword()));
@@ -41,12 +45,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String name, String password) {
+    public User getUser(String phone, String password) {
         try {
             password = MD5Util.getEncryption(password);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return userDao.getUser(name,password);
+        return userDao.getUser(phone,password);
     }
 }

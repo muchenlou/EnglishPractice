@@ -14,5 +14,7 @@ public interface UserDao {
 
 	int update(User user);
 
-    User getUser(@Param("name") String name,@Param("password") String password);
+    User getUser(@Param("phone")String phone,@Param("password") String password);
+
+    User selectByNameAndPhone(@Param("phone") String phone);
 }

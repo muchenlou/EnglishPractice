@@ -25,15 +25,15 @@
 		<div style="height: 40px;"></div>
 		<form >
 			<div class="form-group">
-				<label for="exampleInputEmail1">用户账号</label>
-				<input type="text" class="form-control form_input_class" id="name" placeholder="用户名或者手机号">
+				<label>用户账号</label>
+				<input type="text" class="form-control form_input_class" id="phone" placeholder="手机号">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputPassword1">密码</label>
+				<label>密码</label>
 				<input type="password" class="form-control form_input_class" id="password" placeholder="密码">
 			</div>
 			<button type="button" class="btn btn-success" id="login">登录</button>
-			<button type="button" class="btn btn-info">注册</button>
+			<button type="button" class="btn btn-info" id="sighIn">注册</button>
 		</form>
 	</div>
 </div>
@@ -45,35 +45,24 @@
 <script>
 
 	$("#login").click(function(){
-		var name = $("#name").val();
-		var password = $("#password").val();
+		var phone = $("#phone").val();
+		var pass = $("#password").val();
 		$.ajax({
-			url:"",
+			url:"user/login",
 			type:'post',//HTTP请求类型
-			data: {},
+			data: {'phone':phone,'password':pass,'url':null},
 			success:function(data){
-
+				console.log(data);
+				window.location.href="classify/queryClassify"
 			},
 			error:function(xhr,type,errorThrown){
-
+				alert("登录失败")
 			}
 		});
 	})
-	$.mui.ajax('',{
-		data:{
 
-		},
-		dataType:'json',//服务器返回json格式数据
-		type:'post',//HTTP请求类型
-		timeout:10000,//超时时间设置为10秒；
-		success:function(data){
-
-		},
-		error:function(xhr,type,errorThrown){
-
-		}
-	});
-
-
+	$("#sighIn").click(function () {
+		window.location.href="sigh_in.html"
+	})
 </script>
 </html>

@@ -25,6 +25,10 @@
 	</update>
 
 	<select id="getUser" resultMap="userResult">
-		SELECT * FROM `user` where name = #{name} and password = #{password}
+		SELECT * FROM `user` where phone = #{phone} and password = #{password}
+	</select>
+
+	<select id="selectByNameAndPhone" resultMap="userResult">
+		select * from user where phone = #{phone}
 	</select>
 </mapper>

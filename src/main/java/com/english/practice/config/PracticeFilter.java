@@ -55,7 +55,7 @@ public class PracticeFilter implements Filter {
             chain.doFilter(servletRequest, servletResponse);
         } else {
             // session中包含loginUser对象,则是登录状态
-            if(session!=null&&session.getAttribute("loginUser") != null){
+            if(session!=null&&session.getAttribute("user") != null){
                 chain.doFilter(request, response);
             }else{
                 request.getRequestDispatcher("/index").forward(request, response);

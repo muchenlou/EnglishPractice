@@ -5,10 +5,13 @@ import com.english.practice.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.UUID;
 
@@ -28,13 +31,13 @@ public class UserController {
      * @return h_baojian
      */
     @RequestMapping("/addUser")
-    public boolean addUser(@RequestParam String name,@RequestParam  String phone,@RequestParam  String password){
+    public int addUser(@RequestParam String name,@RequestParam  String phone,@RequestParam  String password){
 
         int i = userService.addUser(name,phone,password);
-        if(i == 0){
-            return false;
+        if(i != 1){
+            return i;
         }
-        return true;
+        return i;
     }
 
     /**
@@ -44,9 +47,11 @@ public class UserController {
      * @param url 进入登录页面前的路径
      * @return
      */
-    @RequestMapping("/login")
-    public User login(@RequestParam  String name,@RequestParam  String password,String url){
-        User user = userService.getUser(name,password);
+    @PostMapping("/login")
+    public User login(@RequestParam  String phone, @RequestParam  String password, String url, HttpServletRequest request){
+        User user = userService.getUser(phone,password);
+        HttpSession session=request.getSession();//获取session并将userName存入session对象
+        session.setAttribute("user", user);
         return user;
     }
 
