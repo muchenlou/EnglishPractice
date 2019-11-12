@@ -1,8 +1,10 @@
 package com.english.practice.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,7 @@ public class HelloController {
     /*
    进入注册页面
     */
-    @RequestMapping("sigh_in.html")
+    @RequestMapping("/sigh_in.html")
     public String sighIn(){
         return "sighIn";
     }
@@ -40,7 +42,7 @@ public class HelloController {
     /*
     添加分类
      */
-    @RequestMapping("addClassify.html")
+    @RequestMapping("/addClassify.html")
     public ModelAndView addClassify(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         HttpSession session=request.getSession();//获取session并将userName存入session对象
@@ -48,5 +50,13 @@ public class HelloController {
         modelAndView.addObject("userId",userId);
         modelAndView.setViewName("addClassify");
         return modelAndView;
+    }
+
+    @RequestMapping("/addWord.html")
+    public ModelAndView addWord(@RequestParam String classifyId){
+        ModelAndView view = new ModelAndView();
+        view.addObject("classifyId",classifyId);
+        view.setViewName("addWord");
+        return view;
     }
 }

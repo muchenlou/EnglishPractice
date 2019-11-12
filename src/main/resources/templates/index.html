@@ -24,7 +24,7 @@
         <div><p class="classify_memu">这里是分类菜单哦</p></div>
         <p th:if="${list.size()==0}">您还没有列表哦，点击添加您自己的分类吧</p>
         <div class="content">
-            <button type="button" class="btn btn-info" th:each="stat:${list}" th:text="${stat.name}" th:name="${stat.id}" ondblclick="copyText(this)">单词</button>
+            <button type="button" class="btn btn-info" th:each="stat:${list}" th:text="${stat.name}" th:name="${stat.id}"  ondblclick="copyText(this)" onclick="openWord(this)">单词</button>
 <!--            <button type="button" class="btn btn-info">句子</button>-->
 <!--            <button type="button" class="btn btn-info">作文</button>-->
         </div>
@@ -44,18 +44,22 @@
         window.location.href="/addClassify.html"
     })
 
-    function copyText(e) {
-        if (confirm("确定要删除该分类吗？")){
-            $.ajax({
-                url:"/classify/deleteClassify",
-                type:'post',//HTTP请求类型
-                data: {"id":e.name},
-                success:function(data){
-                    window.location.href="/classify/queryClassify"
-                }
-            });
-        }
+    // function copyText(e) {
+    //     if (confirm("确定要删除该分类吗？")){
+    //         $.ajax({
+    //             url:"/classify/deleteClassify",
+    //             type:'post',//HTTP请求类型
+    //             data: {"id":e.name},
+    //             success:function(data){
+    //                 window.location.href="/classify/queryClassify"
+    //             }
+    //         });
+    //     }
+    //
+    // }
 
+    function openWord(e) {
+        window.location.href="/word/queryWords?classifyId="+e.name;
     }
 </script>
 </html>

@@ -2,6 +2,8 @@ package com.english.practice.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Word {
     private String id;
@@ -17,4 +19,5 @@ public class Word {
      */
     private Integer type;
 
+    private Date newTime;
 }

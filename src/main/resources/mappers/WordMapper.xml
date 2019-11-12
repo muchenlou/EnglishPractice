@@ -9,6 +9,7 @@
 		<result property="classifyId" column="classify_id" />
 		<result property="isStatus" column="is_status" />
 		<result property="type" column="type" />
+		<result property="newTime" column="new_time" />
 	</resultMap>
 
 	<select id="get" resultMap="wordResult">
@@ -16,7 +17,7 @@
 	</select>
 
 	<insert id="insert" parameterType="com.english.practice.entity.Word">
-		insert into word(`id`,`english_word`,`china_word`,`classify_id`,`is_status`,`type`)values(#{id},#{englishWord},#{chinaWord},#{classifyId},#{isStatus},#{type})
+		insert into word(`id`,`english_word`,`china_word`,`classify_id`,`is_status`,`type`,`new_time`)values(#{id},#{englishWord},#{chinaWord},#{classifyId},#{isStatus},#{type},#{newTime})
 	</insert>
 
 	<update id="update" parameterType="com.english.practice.entity.Word">
@@ -24,7 +25,27 @@
 	</update>
 
 	<select id="queryWordsByType" resultMap="wordResult">
-		select * from word where classify_id = #{classifyId} and type = #{type}
+		select * from word where classify_id = #{classifyId} and is_status != -1 limit ${size * page} , #{size}
 	</select>
 
+
+	<select id="queryWordByClassifyIdAndEnglish" resultMap="wordResult">
+		select * from word where english_word = #{englishWord} and classify_id = #{classifyId} and type = #{type} and is_status = 1 order by new_time
+	</select>
+
+	<select id="edit" resultMap="wordResult">
+		select * from word where id = #{wordId} and is_status = 1;
+	</select>
+
+	<update id="editIsStatusAndWordId">
+		update word set is_status = #{isStatus} where id = #{wordId}
+	</update>
+
+    <update id="editWord" parameterType="com.english.practice.entity.Word">
+        update word set english_word = #{englishWord},china_word = #{chinaWord},type = #{type} where id = #{id}
+    </update>
+
+    <select id="queryEditWord" resultMap="wordResult">
+        select * from word where id = #{wordId}
+    </select>
 </mapper>

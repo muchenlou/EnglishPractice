@@ -15,7 +15,7 @@
 	</select>
 
 	<insert id="insert" parameterType="com.english.practice.entity.Classify">
-		insert into classify(`id`,`name`,`user_id`,`is_status`)values(#{id},#{name},#{userId},#{isStatus})
+		insert into classify(`id`,`name`,`user_id`,`is_status`,`new_time`)values(#{id},#{name},#{userId},#{isStatus},#{newTime})
 	</insert>
 
 	<update id="update" parameterType="com.english.practice.entity.Classify">

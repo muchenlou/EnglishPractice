@@ -6,6 +6,7 @@ import com.english.practice.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,7 +38,60 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<Word> queryWords(String classifyId,Integer type) {
-        return wordDao.queryWordsByType(classifyId,type);
+    public List<Word> queryWords(String classifyId,Integer type,Integer page,Integer size, Integer nowPage) {
+        return wordDao.queryWordsByType(classifyId,type,page,size);
+    }
+
+    @Override
+    public int addWord(String englishWord, String chinaWord, String classifyId, Integer type) {
+        int i = 2;
+        Word word = wordDao.queryWordByClassifyIdAndEnglish(englishWord,classifyId,type);
+        if (word != null){
+            return i;
+        }
+        word = new Word();
+        word.setChinaWord(chinaWord);
+        word.setIsStatus(1);
+        word.setClassifyId(classifyId);
+        word.setType(type);
+        word.setEnglishWord(englishWord);
+        word.setNewTime(new Date());
+        word.setId(UUID.randomUUID().toString().replace("-",""));
+        i = wordDao.insert(word);
+        if (i==1){
+            return i;
+        }
+        return 0;
+    }
+
+    @Override
+    public Word edit(String wordId) {
+        Word word = wordDao.edit(wordId);
+        return word;
+    }
+
+    @Override
+    public int delect(String wordId, Integer isStatus) {
+        int i = wordDao.editIsStatusAndWordId(wordId,isStatus);
+        return i;
+    }
+
+    @Override
+    public int editWord(String englishWord, String chinaWord, String wordId, Integer type,String classifyId) {
+        int i = 2;
+        Word word = wordDao.edit(wordId);
+        if (word == null){
+            return i;
+        }
+        word.setChinaWord(chinaWord);
+        word.setIsStatus(1);
+        word.setType(type);
+        word.setEnglishWord(englishWord);
+        word.setId(wordId);
+        i = wordDao.editWord(word);
+        if (i==1){
+            return i;
+        }
+        return 0;
     }
 }
