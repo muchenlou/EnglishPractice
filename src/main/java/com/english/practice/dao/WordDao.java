@@ -28,4 +28,6 @@ public interface WordDao {
     int editWord(Word word);
 
     Word queryEditWord(@Param("wordId")String wordId);
+
+    long selectCount(@Param("classifyId")String classifyId);
 }

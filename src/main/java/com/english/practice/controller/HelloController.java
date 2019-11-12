@@ -53,9 +53,10 @@ public class HelloController {
     }
 
     @RequestMapping("/addWord.html")
-    public ModelAndView addWord(@RequestParam String classifyId){
+    public ModelAndView addWord(@RequestParam String classifyId,String url){
         ModelAndView view = new ModelAndView();
         view.addObject("classifyId",classifyId);
+        view.addObject("url",url);
         view.setViewName("addWord");
         return view;
     }

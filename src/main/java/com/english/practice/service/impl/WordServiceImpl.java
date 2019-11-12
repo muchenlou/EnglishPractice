@@ -94,4 +94,9 @@ public class WordServiceImpl implements WordService {
         }
         return 0;
     }
+
+    @Override
+    public long selectCount(String classifyId) {
+        return wordDao.selectCount(classifyId);
+    }
 }

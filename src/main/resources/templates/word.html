@@ -76,7 +76,7 @@
 		//添加单词
 		function add(e) {
 			var classifyId = e.name;
-			window.location.href="/addWord.html?classifyId="+classifyId;
+			window.location.href="/addWord.html?classifyId="+classifyId+"&url=/word/queryWords?classifyId=";
 		}
 
 		//编辑
@@ -138,12 +138,13 @@
             var newPage = $("#newPage").val();
             var classifyId = $("#classifyId").val();
             var count = $("#count").val();
-            count = Math.floor(count / size);
-            if (page >= count){
+            count = Math.ceil(count / size);
+            console.log(count)
+            if (page >= count - 1){
                 return alert("已经是最后一页了");
             }
-            page = page + 1;
-            window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&newPage="+newPage;
+            page = Number(page) + 1;
+            window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&type=1";
         }
 	</script>
 </html>
