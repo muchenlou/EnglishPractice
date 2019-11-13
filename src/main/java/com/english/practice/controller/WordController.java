@@ -126,4 +126,20 @@ public class WordController {
         }
         return i;
     }
+
+    /**
+     * 英语练习
+     * @param classifyId
+     * @param sum
+     * @return
+     */
+    @RequestMapping("/englishPractice")
+    public ModelAndView englishPractice(@RequestParam String classifyId,@RequestParam(defaultValue = "60") Integer sum){
+        ModelAndView view = new ModelAndView();
+        //30条英语翻译中文 30条中文翻译英语
+        List<Word> words = wordService.englishPractice(classifyId,sum);
+        view.setViewName("practice");
+        view.addObject("words",words);
+        return view;
+    }
 }

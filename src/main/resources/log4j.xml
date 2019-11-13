@@ -2,8 +2,8 @@
 <!-- status=debug 可以查看log4j的装配过程 -->
 <configuration status="debug">
     <properties>
-        <property name="LOG_HOME">D:\logs\olb_log</property>
-        <property name="FILE_NAME">olb</property>
+        <property name="LOG_HOME">c:\xiaofei_log</property>
+        <property name="FILE_NAME">xiaofei</property>
     </properties>
     <appenders>
         <!-- 定义控制台输出 -->

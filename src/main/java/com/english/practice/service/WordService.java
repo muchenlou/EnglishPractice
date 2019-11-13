@@ -19,4 +19,6 @@ public interface WordService {
     int editWord(String englishWord, String chinaWord, String wordId, Integer type,String classifyId);
 
     long selectCount(String classifyId);
+
+    List<Word> englishPractice(String classifyId,Integer sum);
 }

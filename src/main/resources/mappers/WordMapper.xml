@@ -25,7 +25,7 @@
 	</update>
 
 	<select id="queryWordsByType" resultMap="wordResult">
-		select * from word where classify_id = #{classifyId} and is_status != -1 order by new_time desc limit ${size * page} , #{size}
+		select * from word where classify_id = #{classifyId} and is_status != -1 limit ${size * page} , #{size}
 	</select>
 
 
@@ -51,5 +51,13 @@
 
 	<select id="selectCount" resultType="long">
 		select count(*) from word where is_status != -1
+	</select>
+
+	<select id="PracticeEnglish" resultMap="wordResult">
+		select * from word where classify_id = #{classifyId} order by rand() LIMIT #{sum}
+	</select>
+
+	<select id="PracticeChina" resultMap="wordResult">
+		select id,english_word as china_word,china_word as english_word,classify_id,is_status,type from word  where classify_id = #{classifyId} order by rand() LIMIT #{sum}
 	</select>
 </mapper>
