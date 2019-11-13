@@ -17,4 +17,6 @@ public interface WordService {
     int delect(String wordId, Integer isStatus);
 
     int editWord(String englishWord, String chinaWord, String wordId, Integer type,String classifyId);
+
+    List<Word> englishPractice(String classifyId,Integer sum);
 }

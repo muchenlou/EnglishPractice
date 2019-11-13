@@ -48,4 +48,12 @@
     <select id="queryEditWord" resultMap="wordResult">
         select * from word where id = #{wordId}
     </select>
+
+	<select id="PracticeEnglish" resultMap="wordResult">
+		select * from word where classify_id = #{classifyId} order by rand() LIMIT #{sum}
+	</select>
+
+	<select id="PracticeChina" resultMap="wordResult">
+		select id,english_word as china_word,china_word as english_word,classify_id,is_status,type from word  where classify_id = #{classifyId} order by rand() LIMIT #{sum}
+	</select>
 </mapper>

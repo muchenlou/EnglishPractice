@@ -6,10 +6,7 @@ import com.english.practice.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class WordServiceImpl implements WordService {
@@ -93,5 +90,22 @@ public class WordServiceImpl implements WordService {
             return i;
         }
         return 0;
+    }
+
+    @Override
+    public List<Word> englishPractice(String classifyId, Integer sum) {
+        //30条英语翻译中文 30条中文翻译英语
+        sum = sum / 2;
+        List<Word> words = new ArrayList<Word>();
+        //英文翻译
+        List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum);
+        //中文翻译
+        List<Word> w2 = wordDao.PracticeChina(classifyId,sum);
+        //存入进入list
+        words.addAll(w1);
+        words.addAll(w2);
+        //打乱顺序
+        Collections.shuffle(words);
+        return words;
     }
 }

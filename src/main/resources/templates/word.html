@@ -41,7 +41,7 @@
 			<button type="button" class="btn btn-default btn-sm" onclick="up1()">上一页</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="down()">下一页</button>
 			<button type="button" class="btn btn-default btn-sm" th:name="${classifyId}" onclick="add(this)">添加单词</button>
-			<button type="button" class="btn btn-success btn-sm">开始练习</button>
+			<button type="button" class="btn btn-success btn-sm" th:name="${classifyId}" onclick="open1(this)">开始练习</button>
             <input type="hidden" id="page" th:value="${page}"/>
             <input type="hidden" id="size" th:value="${size}"/>
             <input type="hidden" id="nowPage" th:value="${nowPage}"/>
@@ -145,5 +145,10 @@
             page = page + 1;
             window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&newPage="+newPage;
         }
+        
+        function open1(e) {
+			var classifyId = e.name;
+			window.open("/word/englishPractice?classifyId="+classifyId,"_blank");
+		}
 	</script>
 </html>
