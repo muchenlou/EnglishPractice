@@ -35,8 +35,11 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<Word> queryWords(String classifyId,Integer type,Integer page,Integer size, Integer nowPage) {
-        return wordDao.queryWordsByType(classifyId,type,page,size);
+    public List<Word> queryWords(String classifyId,Integer type,Integer page,Integer size, Integer nowPage,String search) {
+        if (search != null){
+            search = "%"+ search +"%";
+        }
+        return wordDao.queryWordsByType(classifyId,type,page,size,search);
     }
 
     @Override

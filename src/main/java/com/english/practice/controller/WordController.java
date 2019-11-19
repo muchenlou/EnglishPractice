@@ -68,8 +68,8 @@ public class WordController {
      * @return
      */
     @RequestMapping("/queryWords")
-    public ModelAndView queryWords(@RequestParam String classifyId, Integer type, @RequestParam(defaultValue = "0")Integer page, @RequestParam(defaultValue = "10") Integer size, Integer nowPage){
-        List<Word> words = wordService.queryWords(classifyId,type,page,size,nowPage);
+    public ModelAndView queryWords(@RequestParam String classifyId, Integer type, @RequestParam(defaultValue = "0")Integer page, @RequestParam(defaultValue = "10") Integer size, Integer nowPage,String search){
+        List<Word> words = wordService.queryWords(classifyId,type,page,size,nowPage,search);
         long count = wordService.selectCount(classifyId);
         ModelAndView view = new ModelAndView();
         view.setViewName("word");

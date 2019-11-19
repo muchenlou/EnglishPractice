@@ -24,6 +24,13 @@
 		<!-- <div style="height: 40px;"></div> -->
 		<div>
 			<div><p style="text-align: center;font-size: 20px;" th:if="${words.size()==0}">你目前还有录入对应内容哦</p></div>
+			<form class="form-inline">
+				<div class="form-group">
+					<label>关键字</label>
+					<input type="text" class="form-control" id="search" placeholder="输入对于的中文/英文">
+				</div>
+				<button type="submit" class="btn btn-default" onclick="search11()">Search</button>
+			</form>
 			<div>
 				<table class="table table-hover" th:if="${words.size()!=0}">
 					<thead><td>#</td><td>英文单词</td><td>中文翻译</td><td>操作</td></thead>
@@ -39,6 +46,7 @@
 				</table>
 			</div>
 			<!-- Standard button -->
+			<div class="classButton">
 			<button type="button" class="btn btn-default btn-sm" onclick="up1()">上一页</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="down()">下一页</button>
 			<button type="button" class="btn btn-default btn-sm" th:name="${classifyId}" onclick="add(this)">添加单词</button>
@@ -49,6 +57,7 @@
             <input type="hidden" id="nowPage" th:value="${nowPage}"/>
             <input type="hidden" id="classifyId" th:value="${classifyId}"/>
             <input type="hidden" id="count" th:value="${count}"/>
+			</div>
 		</div>
 	</div>
 <!--	<button id="Smallmodal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" style="display:none"></button>-->
@@ -81,25 +90,26 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 </body>
 	<script>
-		$("#login").click(function(){
-				var name = $("#name").val();
-				var pass = $("#password").val();
-				$.ajax({
-					url:"user/login",
-					type:'post',//HTTP请求类型
-					data: {'name':name,'password':pass,'url':null},
-					success:function(data){
-						console.log(data);
-						window.location.href="/classify/queryClassify"
-					},
-					error:function(xhr,type,errorThrown){
-						alert("登录失败")
-					}
-				});
-			})
+		// $("#login").click(function(){
+		// 		var name = $("#name").val();
+		// 		var pass = $("#password").val();
+		// 		$.ajax({
+		// 			url:"user/login",
+		// 			type:'post',//HTTP请求类型
+		// 			data: {'name':name,'password':pass,'url':null},
+		// 			success:function(data){
+		// 				console.log(data);
+		// 				window.location.href="/classify/queryClassify"
+		// 			},
+		// 			error:function(xhr,type,errorThrown){
+		// 				alert("登录失败")
+		// 			}
+		// 		});
+		// 	})
 
 		//添加单词
 		function add(e) {
+
 			var classifyId = e.name;
 			window.location.href="/addWord.html?classifyId="+classifyId+"&url=/word/queryWords?classifyId=";
 		}
@@ -195,6 +205,19 @@
 			var index=myselect.selectedIndex;
 			var type = myselect.options[index].value;
 			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type,"_blank");
+		}
+
+		/**
+		 * 搜索
+		 */
+		function search11() {
+			var search = $("#search").val();
+			if (search == ''){
+				return alert("请输入内容再搜索");
+			}
+			// var classifyId = $("#classifyId").val();
+			// alert(classifyId);
+			// window.location.href="/word/queryWords?classifyId="+classifyId+"&search="+search;
 		}
 	</script>
 </html>

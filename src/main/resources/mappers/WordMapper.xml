@@ -25,7 +25,11 @@
 	</update>
 
 	<select id="queryWordsByType" resultMap="wordResult">
-		select * from word where classify_id = #{classifyId} and is_status != -1 order by new_time desc limit ${size * page} , #{size}
+		select * from word where classify_id = #{classifyId} and is_status != -1
+		 <if test="search != null">
+			 and (english_word like #{search} or china_word like #{search})
+		 </if>
+		 order by new_time desc limit ${size * page} , #{size}
 	</select>
 
 

@@ -16,7 +16,7 @@ public interface WordDao {
 	int update(Word word);
 
 	List<Word> queryWordsByType(@Param("classifyId") String classifyId,@Param("type") Integer type,
-								@Param("page")Integer page,@Param("size")Integer size);
+								@Param("page")Integer page,@Param("size")Integer size,@Param("search") String search);
 
 	Word queryWordByClassifyIdAndEnglish(@Param("englishWord")String englishWord,@Param("classifyId") String classifyId,
 										 @Param("type") Integer type);

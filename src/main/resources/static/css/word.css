@@ -17,13 +17,14 @@
 .form_input_class{
 	width: 200px;
 }
-button{
-	position: relative;
-	left: 200px;
-	top:-10px;
-}
+
 .big{
 	width: 300px;
 	height: 400px;
 	margin: 0 auto;
+}
+.classButton{
+	width: 300px;
+	margin:0 auto;
+	padding-bottom: 5px;
 }
