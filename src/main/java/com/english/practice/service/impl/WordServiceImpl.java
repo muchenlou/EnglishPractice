@@ -98,14 +98,14 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<Word> englishPractice(String classifyId, Integer sum) {
+    public List<Word> englishPractice(String classifyId, Integer sum,Integer type) {
         //30条英语翻译中文 30条中文翻译英语
         sum = sum / 2;
         List<Word> words = new ArrayList<Word>();
         //英文翻译
-        List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum);
+        List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum,type);
         //中文翻译
-        List<Word> w2 = wordDao.PracticeChina(classifyId,sum);
+        List<Word> w2 = wordDao.PracticeChina(classifyId,sum,type);
         //存入进入list
         words.addAll(w1);
         words.addAll(w2);

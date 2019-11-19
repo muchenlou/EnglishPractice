@@ -32,7 +32,8 @@
 						<td th:text="${word.chinaWord}">中文翻译</td><td>
 							<a th:name="${word.id}" onclick="edit(this)">编辑</a>
 							<a th:name="${word.id}" onclick="dele(this)">删除</a>
-							<a th:name="${word.id}" onclick="yidu(this)">已读</a>
+							<a th:name="${word.id}" onclick="yidu(this)" th:if="${word.isStatus == 1}">已会</a>
+							<a th:name="${word.id}" onclick="yidu2(this)" th:if="${word.isStatus == 2}">取消</a>
 						</td></tr>
 					</tbody>
 				</table>
@@ -41,12 +42,36 @@
 			<button type="button" class="btn btn-default btn-sm" onclick="up1()">上一页</button>
 			<button type="button" class="btn btn-default btn-sm" onclick="down()">下一页</button>
 			<button type="button" class="btn btn-default btn-sm" th:name="${classifyId}" onclick="add(this)">添加单词</button>
-			<button type="button" class="btn btn-success btn-sm" th:name="${classifyId}" onclick="open1(this)">开始练习</button>
+<!--			<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" th:name="${classifyId}" onclick="open1(this)">开始练习</button>-->
+			<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" th:name="${classifyId}">开始练习</button>
             <input type="hidden" id="page" th:value="${page}"/>
             <input type="hidden" id="size" th:value="${size}"/>
             <input type="hidden" id="nowPage" th:value="${nowPage}"/>
             <input type="hidden" id="classifyId" th:value="${classifyId}"/>
             <input type="hidden" id="count" th:value="${count}"/>
+		</div>
+	</div>
+<!--	<button id="Smallmodal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" style="display:none"></button>-->
+
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content" style="text-align: center;font-size: 20px;">
+				<div style="height: 200px;width: 100px">
+					<div class="form-group">
+						<label>数量</label>
+						<input type="number" class="form-control form_input_class" id="sum" placeholder="请输入数量默认60">
+					</div>
+					<div class="form-group">
+					<label>类型</label>
+					<select id="test" class="form-control form_input_class">
+						<option value ="1">最新</option>
+						<option value ="2">最旧</option>
+						<option value="3">全部</option>
+					</select>
+					</div>
+					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" th:name="${classifyId}" onclick="open1(this)" style="padding-left: -200px">开始练习</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -81,7 +106,7 @@
 
 		//编辑
         function edit(e) {
-			window.location.href="/word/edit?wordId="+e.name;
+			window.location.href="/word/edit?wordId="+e.name+"&url=/word/queryWords?classifyId=";
         }
 
         //删除
@@ -119,7 +144,23 @@
 				}
 			});
         }
-
+		//已读
+		function yidu2(e) {
+			var wordId = e.name;
+			$.ajax({
+				url:"/word/delect",
+				type:'post',//HTTP请求类型
+				data: {'wordId':wordId,'isStatus':1},
+				success:function(data){
+					if (data==1){
+						alert("取消已会成功！测试将加入该单词");
+						window.location.reload();
+					}else{
+						alert("设置失败，详情找小肥")
+					}
+				}
+			});
+		}
         function up1() {
             var page = $("#page").val();
             var size = $("#size").val();
@@ -149,7 +190,11 @@
         
         function open1(e) {
 			var classifyId = e.name;
-			window.open("/word/englishPractice?classifyId="+classifyId,"_blank");
+			var sum = $("#sum").val();
+			var myselect=document.getElementById("test");
+			var index=myselect.selectedIndex;
+			var type = myselect.options[index].value;
+			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type,"_blank");
 		}
 	</script>
 </html>

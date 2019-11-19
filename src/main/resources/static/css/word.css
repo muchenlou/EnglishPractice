@@ -22,3 +22,8 @@ button{
 	left: 200px;
 	top:-10px;
 }
+.big{
+	width: 300px;
+	height: 400px;
+	margin: 0 auto;
+}

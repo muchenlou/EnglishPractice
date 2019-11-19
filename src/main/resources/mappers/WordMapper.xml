@@ -25,7 +25,7 @@
 	</update>
 
 	<select id="queryWordsByType" resultMap="wordResult">
-		select * from word where classify_id = #{classifyId} and is_status != -1 limit ${size * page} , #{size}
+		select * from word where classify_id = #{classifyId} and is_status != -1 order by new_time desc limit ${size * page} , #{size}
 	</select>
 
 
@@ -54,10 +54,29 @@
 	</select>
 
 	<select id="PracticeEnglish" resultMap="wordResult">
-		select * from word where classify_id = #{classifyId} order by rand() LIMIT #{sum}
+		select * from word where classify_id = #{classifyId} and is_status = 1
+		<if test="type == 1">
+			order by new_time desc LIMIT #{sum}
+		</if>
+		<if test="type == 3">
+			order by order by new_time LIMIT #{sum}
+		</if>
+		<if test="type == 3">
+			order by rand() LIMIT #{sum}
+		</if>
 	</select>
 
 	<select id="PracticeChina" resultMap="wordResult">
-		select id,english_word as china_word,china_word as english_word,classify_id,is_status,type from word  where classify_id = #{classifyId} order by rand() LIMIT #{sum}
+		select id,english_word as china_word,china_word as english_word,classify_id,is_status,type from word  where classify_id = #{classifyId} and is_status = 1
+		<if test="type == 1">
+			order by new_time desc LIMIT #{sum}
+		</if>
+		<if test="type == 3">
+			order by order by new_time LIMIT #{sum}
+		</if>
+		<if test="type == 3">
+			order by rand() LIMIT #{sum}
+		</if>
+
 	</select>
 </mapper>

@@ -88,11 +88,12 @@ public class WordController {
      * @return
      */
     @RequestMapping("/edit")
-    public ModelAndView edit(@RequestParam String wordId){
+    public ModelAndView edit(@RequestParam String wordId,String url){
         ModelAndView view = new ModelAndView();
         Word word = wordService.edit(wordId);
         view.setViewName("editWord");
         view.addObject("word",word);
+        view.addObject("url",url);
         return view;
     }
 
@@ -134,10 +135,10 @@ public class WordController {
      * @return
      */
     @RequestMapping("/englishPractice")
-    public ModelAndView englishPractice(@RequestParam String classifyId,@RequestParam(defaultValue = "60") Integer sum){
+    public ModelAndView englishPractice(@RequestParam String classifyId,@RequestParam(defaultValue = "60") Integer sum,Integer type){
         ModelAndView view = new ModelAndView();
         //30条英语翻译中文 30条中文翻译英语
-        List<Word> words = wordService.englishPractice(classifyId,sum);
+        List<Word> words = wordService.englishPractice(classifyId,sum,type);
         view.setViewName("practice");
         view.addObject("words",words);
         return view;

@@ -40,8 +40,10 @@
 					</select>
 				 </div><br/>
 				  <button type="button" class="btn btn-success" id="sigh_in" onclick="t1()">确定</button>
+					<button type="button" class="btn btn-info"  onclick="got()">返回</button>
 					<input type="hidden" th:value="${word.id}" id="wordId"/>
 					<input type="hidden" th:value="${word.classifyId}" id="classifyId"/>
+					<input type="hidden" th:value="${url}" id="url"/>
 				</form>
 			</div>
 
@@ -94,7 +96,12 @@
 				}
 			});
 		 }
-		
+		function got() {
+			var classifyId = $("#classifyId").val();
+			var url = $("#url").val();
+			window.location.href=url+classifyId;
+		}
+
 		function reload() {
 			window.location.reload();
 		}

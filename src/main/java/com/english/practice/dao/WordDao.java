@@ -31,7 +31,7 @@ public interface WordDao {
 
     long selectCount(@Param("classifyId")String classifyId);
 
-    List<Word> PracticeEnglish(@Param("classifyId")String classifyId,@Param("sum") Integer sum);
+    List<Word> PracticeEnglish(@Param("classifyId")String classifyId,@Param("sum") Integer sum,@Param("type") Integer type);
 
-	List<Word> PracticeChina(@Param("classifyId")String classifyId,@Param("sum") Integer sum);
+	List<Word> PracticeChina(@Param("classifyId")String classifyId,@Param("sum") Integer sum,@Param("type") Integer type);
 }
