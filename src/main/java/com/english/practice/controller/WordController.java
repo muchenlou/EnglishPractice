@@ -70,7 +70,7 @@ public class WordController {
     @RequestMapping("/queryWords")
     public ModelAndView queryWords(@RequestParam String classifyId, Integer type, @RequestParam(defaultValue = "0")Integer page, @RequestParam(defaultValue = "10") Integer size, Integer nowPage,String search){
         List<Word> words = wordService.queryWords(classifyId,type,page,size,nowPage,search);
-        long count = wordService.selectCount(classifyId);
+        long count = wordService.selectCount(classifyId,search);
         ModelAndView view = new ModelAndView();
         view.setViewName("word");
         view.addObject("words",words);
@@ -79,6 +79,7 @@ public class WordController {
         view.addObject("size",size);
         view.addObject("nowPage",nowPage);
         view.addObject("count",count);
+        view.addObject("search",search);
         return view;
     }
 

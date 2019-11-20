@@ -29,7 +29,7 @@
 						  <tbody style="text-align: center;">
 							  <tr th:each="word:${words}">
 								  <td th:text="${word.englishWord}"></td>
-								  <td><input type="text" class="form-control control" name="" id="" value="" /></td>
+								  <td><input type="text" class="form-control control" th:name="${word.chinaWord}" id="" value="" onblur="getWord(this)"/></td>
 								  <td><a th:name="${word.chinaWord}" onclick="result1(this)">查看答案</a></td>
 							  </tr>
 						  </tbody>
@@ -71,6 +71,18 @@
 				e.text = e.name;
 			} else{
 				e.text = "查看答案"
+			}
+		}
+
+		//失去焦点事件
+		function getWord(e) {
+			var inputWord = e.value;
+			var inputResult = e.name;
+			console.log(inputWord);
+			if (inputWord == inputResult){
+				$(e).css("border","solid 1px green")
+			}else{
+				$(e).css("border","solid 1px red")
 			}
 		}
 	</script>

@@ -24,13 +24,15 @@
 		<!-- <div style="height: 40px;"></div> -->
 		<div>
 			<div><p style="text-align: center;font-size: 20px;" th:if="${words.size()==0}">你目前还有录入对应内容哦</p></div>
-			<form class="form-inline">
-				<div class="form-group">
-					<label>关键字</label>
-					<input type="text" class="form-control" id="search" placeholder="输入对于的中文/英文">
-				</div>
-				<button type="submit" class="btn btn-default" onclick="search11()">Search</button>
-			</form>
+			<div class="form-inline search">
+
+					<div class="form-group">
+						<label>关键字</label>
+						<input type="text" class="form-control" id="search" th:value="${search}" placeholder="输入对于的中文/英文">
+					</div>
+					<button type="submit" class="btn btn-default" onclick="search1()">Search</button>
+
+			</div>
 			<div>
 				<table class="table table-hover" th:if="${words.size()!=0}">
 					<thead><td>#</td><td>英文单词</td><td>中文翻译</td><td>操作</td></thead>
@@ -176,11 +178,16 @@
             var size = $("#size").val();
             var newPage = $("#newPage").val();
             var classifyId = $("#classifyId").val();
+			var search = $("#search").val();
             if (page == 0){
                 return alert("最前一页了");
             }
             page = page - 1;
-            window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&newPage="+newPage;
+            if (search == ""){
+				window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&newPage="+newPage;
+			} else{
+				window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&newPage="+newPage+"&search="+search;
+			}
         }
         
         function down() {
@@ -188,6 +195,7 @@
             var size = $("#size").val();
             var newPage = $("#newPage").val();
             var classifyId = $("#classifyId").val();
+			var search = $("#search").val();
             var count = $("#count").val();
             count = Math.ceil(count / size);
             console.log(count)
@@ -195,7 +203,12 @@
                 return alert("已经是最后一页了");
             }
             page = Number(page) + 1;
-            window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&type=1";
+            if (search == ""){
+				window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size;
+			} else{
+				window.location.href="/word/queryWords?classifyId="+classifyId+"&page="+page+"&size="+size+"&search="+search;
+			}
+
         }
         
         function open1(e) {
@@ -204,20 +217,21 @@
 			var myselect=document.getElementById("test");
 			var index=myselect.selectedIndex;
 			var type = myselect.options[index].value;
+			console.log(type);
 			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type,"_blank");
 		}
 
 		/**
 		 * 搜索
 		 */
-		function search11() {
+		function search1() {
 			var search = $("#search").val();
+			var classifyId = $("#classifyId").val();
 			if (search == ''){
-				return alert("请输入内容再搜索");
+				window.location.href="/word/queryWords?classifyId="+classifyId;
+			}else{
+				window.location.href="/word/queryWords?classifyId="+classifyId+"&search="+search;
 			}
-			// var classifyId = $("#classifyId").val();
-			// alert(classifyId);
-			// window.location.href="/word/queryWords?classifyId="+classifyId+"&search="+search;
 		}
 	</script>
 </html>

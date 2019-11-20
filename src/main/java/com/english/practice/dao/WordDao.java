@@ -29,7 +29,7 @@ public interface WordDao {
 
     Word queryEditWord(@Param("wordId")String wordId);
 
-    long selectCount(@Param("classifyId")String classifyId);
+    long selectCount(@Param("classifyId")String classifyId,@Param("search") String search);
 
     List<Word> PracticeEnglish(@Param("classifyId")String classifyId,@Param("sum") Integer sum,@Param("type") Integer type);
 

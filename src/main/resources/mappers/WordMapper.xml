@@ -55,6 +55,9 @@
 
 	<select id="selectCount" resultType="long">
 		select count(*) from word where is_status != -1
+		<if test="search != null and search != ''">
+			and (english_word like #{search} or china_word like #{search})
+		</if>
 	</select>
 
 	<select id="PracticeEnglish" resultMap="wordResult">
@@ -62,8 +65,8 @@
 		<if test="type == 1">
 			order by new_time desc LIMIT #{sum}
 		</if>
-		<if test="type == 3">
-			order by order by new_time LIMIT #{sum}
+		<if test="type == 2">
+			order by new_time LIMIT #{sum}
 		</if>
 		<if test="type == 3">
 			order by rand() LIMIT #{sum}
@@ -75,8 +78,8 @@
 		<if test="type == 1">
 			order by new_time desc LIMIT #{sum}
 		</if>
-		<if test="type == 3">
-			order by order by new_time LIMIT #{sum}
+		<if test="type == 2">
+			order by new_time LIMIT #{sum}
 		</if>
 		<if test="type == 3">
 			order by rand() LIMIT #{sum}

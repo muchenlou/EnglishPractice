@@ -96,8 +96,11 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public long selectCount(String classifyId) {
-        return wordDao.selectCount(classifyId);
+    public long selectCount(String classifyId,String search) {
+        if (search != null && search != ""){
+            search = "%"+ search +"%";
+        }
+        return wordDao.selectCount(classifyId,search);
     }
 
     @Override
