@@ -67,7 +67,7 @@
 	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content" style="text-align: center;font-size: 20px;">
-				<div style="height: 200px;width: 100px">
+				<div style="height: 300px;width: 100px">
 					<div class="form-group">
 						<label>数量</label>
 						<input type="number" class="form-control form_input_class" id="sum" placeholder="请输入数量默认60">
@@ -78,6 +78,12 @@
 						<option value ="1">最新</option>
 						<option value ="2">最旧</option>
 						<option value="3">全部</option>
+					</select>
+					<label>练习类型</label>
+					<select id="test1" class="form-control form_input_class">
+						<option value ="1">英汉互翻译</option>
+						<option value ="2">英翻译汉</option>
+						<option value="3">汉翻译英</option>
 					</select>
 					</div>
 					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" th:name="${classifyId}" onclick="open1(this)" style="padding-left: -200px">开始练习</button>
@@ -217,8 +223,10 @@
 			var myselect=document.getElementById("test");
 			var index=myselect.selectedIndex;
 			var type = myselect.options[index].value;
-			console.log(type);
-			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type,"_blank");
+			var myselect1=document.getElementById("test1");
+			var index1=myselect1.selectedIndex;
+			var type1 = myselect1.options[index1].value;
+			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type+"&type1="+type1,"_blank");
 		}
 
 		/**

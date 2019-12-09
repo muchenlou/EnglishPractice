@@ -20,5 +20,5 @@ public interface WordService {
 
     long selectCount(String classifyId,String search);
 
-    List<Word> englishPractice(String classifyId,Integer sum,Integer type);
+    List<Word> englishPractice(String classifyId,Integer sum,Integer type,Integer type1);
 }

@@ -136,10 +136,10 @@ public class WordController {
      * @return
      */
     @RequestMapping("/englishPractice")
-    public ModelAndView englishPractice(@RequestParam String classifyId,@RequestParam(defaultValue = "60") Integer sum,Integer type){
+    public ModelAndView englishPractice(@RequestParam String classifyId,@RequestParam(defaultValue = "60") Integer sum,Integer type,Integer type1){
         ModelAndView view = new ModelAndView();
-        //30条英语翻译中文 30条中文翻译英语
-        List<Word> words = wordService.englishPractice(classifyId,sum,type);
+        //一半条英语翻译中文 一半条中文翻译英语
+        List<Word> words = wordService.englishPractice(classifyId,sum,type,type1);
         view.setViewName("practice");
         view.addObject("words",words);
         return view;

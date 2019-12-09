@@ -104,17 +104,28 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<Word> englishPractice(String classifyId, Integer sum,Integer type) {
+    public List<Word> englishPractice(String classifyId, Integer sum,Integer type,Integer type1) {
         //30条英语翻译中文 30条中文翻译英语
-        sum = sum / 2;
         List<Word> words = new ArrayList<Word>();
-        //英文翻译
-        List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum,type);
-        //中文翻译
-        List<Word> w2 = wordDao.PracticeChina(classifyId,sum,type);
-        //存入进入list
-        words.addAll(w1);
-        words.addAll(w2);
+        if (type1 == 1 ){
+            sum = sum / 2;
+            //英文翻译
+            List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum,type);
+            //中文翻译
+            List<Word> w2 = wordDao.PracticeChina(classifyId,sum,type);
+            //存入进入list
+            words.addAll(w1);
+            words.addAll(w2);
+        }else if (type1 == 2){
+            List<Word> w1 = wordDao.PracticeEnglish(classifyId,sum,type);
+            //存入进入list
+            words.addAll(w1);
+        }else if (type1 == 3){
+            //中文翻译
+            List<Word> w2 = wordDao.PracticeChina(classifyId,sum,type);
+            words.addAll(w2);
+        }
+
         //打乱顺序
         Collections.shuffle(words);
         return words;
