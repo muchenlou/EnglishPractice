@@ -80,12 +80,21 @@
 						<option value ="2">最旧</option>
 						<option value="3">全部</option>
 					</select>
+					</div>
+					<div class="form-group">
 					<label>练习类型</label>
 					<select id="test1" class="form-control form_input_class">
 						<option value ="1">英汉互翻译</option>
 						<option value ="2">英翻译汉</option>
 						<option value="3">汉翻译英</option>
 					</select>
+					</div>
+					<div class="form-group">
+						<label>困难模式</label>
+						<select id="test2" class="form-control form_input_class">
+							<option value ="1">否</option>
+							<option value ="2">是</option>
+						</select>
 					</div>
 					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm" th:name="${classifyId}" onclick="open1(this)" style="padding-left: -200px">开始练习</button>
 				</div>
@@ -227,7 +236,10 @@
 			var myselect1=document.getElementById("test1");
 			var index1=myselect1.selectedIndex;
 			var type1 = myselect1.options[index1].value;
-			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type+"&type1="+type1,"_blank");
+			var myselect2=document.getElementById("test2");
+			var index2=myselect1.selectedIndex;
+			var type2 = myselect1.options[index2].value;
+			window.open("/word/englishPractice?classifyId="+classifyId+"&sum="+sum+"&type="+type+"&type1="+type1+"&type2="+type2,"_blank");
 		}
 
 		/**

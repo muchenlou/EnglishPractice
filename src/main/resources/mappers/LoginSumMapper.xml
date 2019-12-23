@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.english.practice.dao.LoginSumDao">
+
+	<resultMap id="loginSumResult" type="com.english.practice.entity.LoginSum">
+		<result property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="loginTime" column="login_time" />
+	</resultMap>
+
+	<select id="get" resultMap="loginSumResult">
+		select `id`,`user_id`,`user_name`,`login_time` from login_sum
+	</select>
+
+	<insert id="insert" parameterType="com.english.practice.entity.LoginSum">
+		insert into login_sum(`id`,`user_id`,`user_name`,`login_time`)values(#{id},#{userId},#{userName},#{loginTime})
+	</insert>
+
+	<update id="update" parameterType="com.english.practice.entity.LoginSum">
+		update login_sum set `id`=#{id},`user_id`=#{userId},`user_name`=#{userName},`login_time`=#{loginTime}
+	</update>
+
+	<insert id="addNotes" parameterType="object">
+		insert into login_sum(`user_id`,`user_name`,`login_time`)values(#{id},#{name},#{date})
+	</insert>
+</mapper>

@@ -1,6 +1,7 @@
 package com.english.practice.controller;
 
 import com.english.practice.entity.User;
+import com.english.practice.service.LoginSumService;
 import com.english.practice.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private LoginSumService loginSumService;
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /**
@@ -50,6 +53,8 @@ public class UserController {
     @PostMapping("/login")
     public User login(@RequestParam  String phone, @RequestParam  String password, String url, HttpServletRequest request){
         User user = userService.getUser(phone,password);
+        //记录
+        loginSumService.addNotes(user);
         HttpSession session=request.getSession();//获取session并将userName存入session对象
         session.setAttribute("user", user);
         session.setAttribute("userId", user.getId());
@@ -57,5 +62,4 @@ public class UserController {
         session.setAttribute("phone", user.getPhone());
         return user;
     }
-
 }

@@ -44,7 +44,7 @@ public class PracticeFilter implements Filter {
         HttpSession session = request.getSession(false);
         String uri = request.getRequestURI();
         //是否需要过滤
-        boolean needFilter = true;
+        boolean needFilter = false;
         //不需要登录就可以访问的路径(比如:注册登录等)
         List<String> list = new ArrayList<String>(Arrays.asList("/","/sigh_in.html","/user/login","/user/addUser"));
         if(list.contains(uri)){

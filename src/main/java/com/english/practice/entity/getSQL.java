@@ -36,12 +36,12 @@ public class getSQL {
      * 设置参数--需要修改
      */
     public static void test_Table() {
-        String tableName = "w";//需要转换的表
+        String tableName = "login_sum";//需要转换的表
         String host = "122.51.167.169";//数据库host
         String port = "3306";//数据库端口
         String database = "englishpractice";//数据库名
         String username = "root";//数据库用户名
-        String password = "123456";//数据库用密码
+        String password = "javase520";//数据库用密码
         String path = "H:/file/";//生成文件存放目录，不包括文件名，文件名自动命名为 '表名.java,表名Mapper.xml,表名Dao.java' 首字母大写
         String dao_package = "com.english.practice.dao";//dao的包路径
         String entity_package = "com.english.practice.entity";//entity的包路径
